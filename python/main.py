@@ -1,14 +1,14 @@
 from lxml import html
-import requests
+from requests import get
+from bs4 import BeautifulSoup
 
-url = "https://www.glassdoor.com/Job/operation-research-analyst-jobs-SRCH_KO0,26_IP3.htm"
-headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36'} # This is chrome, you can set whatever browser you like
-
-response = requests.get(url, headers=headers)
+url = "https://www.indeed.com/q-Job-Find-jobs.html"
+headers = ({'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'})
+response = get(url, headers=headers)
 # tree = html.fromstring(response.content)
 # data = tree.xpath('//*[@id="MainCol"]/div/ul/li[1]/div[2]/div[1]/div[1]/a')
+#print(response.text[:100])
 
-print(response.text[:1000])
 html_soup = BeautifulSoup(response.text, 'html.parser')
-
-print(tree.tag)
+jobs_desc = html_soup.find_all('span', class_='summary')
+print(jobs_desc[:100])
