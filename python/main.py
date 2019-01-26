@@ -1,12 +1,12 @@
 from lxml import html
 from requests import get
 from bs4 import BeautifulSoup
-import csv
+import pandas as pd
 from getPageElement import getContent
 
 
-web_prefix = "https://www.indeed.fi"
-url = "https://www.indeed.fi/jobs?q=operations&l=Vaasa"
+web_prefix = "https://www.indeed.com"
+url = "https://www.indeed.com/jobs?q=operations&l=New+York%2C+NY"
 headers = ({'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'})
 
 response = get(url, headers=headers)
@@ -19,14 +19,20 @@ jobs_link_div  = html_soup.find_all('div',class_ = "jobsearch-SerpJobCard")
 job_links = []
 job_title = []
 for i in range(0, len(jobs_link_div)):
-    job_links.append(jobs_link_div[i].find_all('a')[0]['href'])
-    job_title.append(jobs_link_div[i].find_all('a')[0]['title'])
-print(job_title[1])
+    temp = jobs_link_div[i].find_all('a')[0]
+    job_links.append(web_prefix+ temp['href'])
+    job_title.append(temp['title'])
 
 #Travel all the pages:
+data_list = []
+#print(job_links)
 for i in range(0, len(job_links)):
-    link = web_prefix + job_links[i]
+    link = job_links[i]
     response = getContent(url=link, headers=headers)
-    print(response)
-    break
+    data_list.append(response)
 
+print(data_list[1])
+df = pd.DataFrame({'Job title':job_title, 'Description':data_list, 'Link': job_links})
+writer = pd.ExcelWriter('output.xlsx')
+df.to_excel(writer, sheet_name='Sheet1')
+writer.save()
