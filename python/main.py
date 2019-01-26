@@ -7,12 +7,16 @@ headers = ({'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTM
 response = get(url, headers=headers)
 # tree = html.fromstring(response.content)
 # data = tree.xpath('//*[@id="MainCol"]/div/ul/li[1]/div[2]/div[1]/div[1]/a')
-print(response.text[:100])
+# print(response.text[:100])
 
 html_soup = BeautifulSoup(response.text, 'html.parser')
-jobs_desc = html_soup.find_all('p')[2].text
-jobs_desc.replace('<p>','')
-jobs_desc.replace('</p>','')
-jobs_desc.replace('<b>','')
-jobs_desc.replace('</b>','')
-print(jobs_desc[:100])
+jobs_desc = html_soup.find_all('p')
+
+# Remove all the html tag from the result
+for i in range(0, len(jobs_desc)):
+    # jobs_desc[i].replace('<p>','')
+    # jobs_desc[i].replace('</p>','')
+    # jobs_desc[i].replace('<b>','')
+    # jobs_desc[i].replace('</b>','')
+    print(jobs_desc[i].string)
+    #print(type(jobs_desc[1].string))
