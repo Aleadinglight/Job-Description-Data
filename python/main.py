@@ -14,9 +14,4 @@ jobs_desc = html_soup.find_all('p')
 
 # Remove all the html tag from the result
 for i in range(0, len(jobs_desc)):
-    # jobs_desc[i].replace('<p>','')
-    # jobs_desc[i].replace('</p>','')
-    # jobs_desc[i].replace('<b>','')
-    # jobs_desc[i].replace('</b>','')
     print(jobs_desc[i].string)
-    #print(type(jobs_desc[1].string))
