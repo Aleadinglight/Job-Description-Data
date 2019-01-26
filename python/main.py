@@ -10,5 +10,9 @@ response = get(url, headers=headers)
 print(response.text[:100])
 
 html_soup = BeautifulSoup(response.text, 'html.parser')
-jobs_desc = html_soup.find_all('p')
+jobs_desc = html_soup.find_all('p')[2].text
+jobs_desc.replace('<p>','')
+jobs_desc.replace('</p>','')
+jobs_desc.replace('<b>','')
+jobs_desc.replace('</b>','')
 print(jobs_desc[:100])
