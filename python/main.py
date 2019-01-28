@@ -3,10 +3,15 @@ from requests import get
 from bs4 import BeautifulSoup
 import pandas as pd
 from getPageElement import getContent
+import argparse
 
+parser = argparse.ArgumentParser()
+parser.add_argument("url", help="Input the result url of the job search.")
+args = parser.parse_args()
 
 web_prefix = "https://www.indeed.com"
-url = "https://www.indeed.com/jobs?q=operations&l=New+York%2C+NY"
+url = args.url
+#url = "https://www.indeed.com/jobs?q=operations&l=New+York%2C+NY"
 headers = ({'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'})
 
 response = get(url, headers=headers)
