@@ -1,6 +1,6 @@
 # Data Scrapping With Python
 
-Using Python to scrap job's description data from Indeed.com
+Using Python script to scrap job's description data from Indeed.com
 
 # Installation
 
@@ -19,4 +19,24 @@ Install the following library if there should be any errors
 ```bash
 pip install xlsxwriter
 pip install requests
+```
+
+# Using the script
+
+1. Clone the project
+
+```bash
+git clone https://github.com/Aleadinglight/Job-Description-Data.git
+```
+
+2. Go to the `python` directory
+
+```bash
+cd python
+```
+
+3. Run the script in `main.py` with the link that you have
+
+```bash
+python main.py "www.blabla.com"
 ```
