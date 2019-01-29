@@ -43,6 +43,6 @@ python main.py "www.blabla.com"
 
 An example on how to get the link
 
-<img src="../blob/master/copylink.png"  width="300"/>
+<img src="../master/copylink.png"  width="300"/>
 
 4. The result will be in `output.xlsx`
